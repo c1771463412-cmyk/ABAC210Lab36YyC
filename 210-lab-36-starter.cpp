@@ -87,11 +87,32 @@ int main() {
             break;
 
         case 4:
+            cout << "Enter the code to modify: ";
+            if (!(cin >> code))
+                return 0;
 
+            if (tree.searchNode(code)) {
+                cout << "Enter the new code: ";
+                if (!(cin >> newCode))
+                    return 0;
+
+                if (newCode == code) {
+                    cout << "Code unchanged." << endl;
+                } else if (tree.searchNode(newCode)) {
+                    cout << "New code already exists." << endl;
+                } else {
+                    tree.remove(code);
+                    tree.insertNode(newCode);
+                    cout << "Code modified." << endl;
+                }
+            } else {
+                cout << "Code not found." << endl;
+            }
             break;
 
         case 5:
-        
+            cout << "\nCodes in the BST:" << endl;
+            tree.displayInOrder();
             break;
 
         case 6:
