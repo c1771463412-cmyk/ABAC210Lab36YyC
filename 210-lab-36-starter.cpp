@@ -1,38 +1,30 @@
 #include <iostream>
+#include <fstream>
 #include "IntBinaryTree.h"
 using namespace std;
 
 int main() {
     IntBinaryTree tree;
 
-    // Test inserting string values
-    tree.insertNode("M50");
-    tree.insertNode("A20");
-    tree.insertNode("Z90");
-    tree.insertNode("B30");
-    tree.insertNode("X70");
+    // Open the file containing the codes
+    ifstream fin("codes.txt");
 
-    // Test inorder traversal
-    cout << "Inorder traversal:" << endl;
-    tree.displayInOrder();
+    if (!fin) {
+        cout << "Error opening codes.txt" << endl;
+        return 1;
+    }
 
-    // Test searching for existing and missing values
-    cout << "\nSearching for A20: ";
-    if (tree.searchNode("A20"))
-        cout << "Found" << endl;
-    else
-        cout << "Not found" << endl;
+    // Read each code and insert it into the BST
+    string code;
 
-    cout << "Searching for C40: ";
-    if (tree.searchNode("C40"))
-        cout << "Found" << endl;
-    else
-        cout << "Not found" << endl;
+    while (fin >> code) {
+        tree.insertNode(code);
+    }
 
-    // Test removing a string value
-    tree.remove("A20");
+    fin.close();
 
-    cout << "\nAfter removing A20:" << endl;
+    // Display all codes using inorder traversal
+    cout << "Codes in the BST:" << endl;
     tree.displayInOrder();
 
     return 0;
