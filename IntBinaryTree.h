@@ -114,6 +114,8 @@ void IntBinaryTree::remove(string num) {
 // deleteNode deletes the node whose value
 // member is the same as num.
 void IntBinaryTree::deleteNode(string num, TreeNode *&nodePtr) {
+   if (!nodePtr)
+      return;
    if (num < nodePtr->value)
       deleteNode(num, nodePtr->left);
    else if (num > nodePtr->value)
